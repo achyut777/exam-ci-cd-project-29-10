@@ -63,9 +63,9 @@ jobs:
             mkdir -p /home/ubuntu/app
             cd /home/ubuntu/app
             sed -i "s|YOUR_DOCKERHUB_USERNAME|${{ steps.docker_username.outputs.value }}|g" docker-compose.yml
-            echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ steps.docker_username.outputs.value }}" --password-stdin
-            docker pull ${{ steps.docker_username.outputs.value }}/frontend:latest
-            docker pull ${{ steps.docker_username.outputs.value }}/backend:latest
-            docker compose down
-            docker compose up -d
-            docker image prune -f
+            echo "${{ secrets.DOCKER_PASSWORD }}" | sudo docker login -u "${{ steps.docker_username.outputs.value }}" --password-stdin
+            sudo docker pull ${{ steps.docker_username.outputs.value }}/frontend:latest
+            sudo docker pull ${{ steps.docker_username.outputs.value }}/backend:latest
+            sudo docker compose down
+            sudo docker compose up -d
+            sudo docker image prune -f
